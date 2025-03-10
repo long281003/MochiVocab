@@ -1,9 +1,11 @@
 <script setup>
-    
+import store from '@/store';
+const openModal = () => {
+    store.dispatch('openlModalCourse')
+}
 </script>
 
 <template>
-    <div class="py-20">
             <div>
                 <div class="flex justify-center items-center">
                     <img src="../assets/image.png" width="300" />
@@ -15,5 +17,4 @@
                         mới</button>
                 </div>
             </div>
-        </div>
 </template>

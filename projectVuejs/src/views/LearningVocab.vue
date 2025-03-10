@@ -139,7 +139,6 @@ onMounted(async () => {
   if (currentStep.value === 0) {
     playAudio();
   }
-  console.log("bảng: ",vocabList.value)
 });
 
 const playAudio = () => {

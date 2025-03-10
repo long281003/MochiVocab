@@ -1,13 +1,35 @@
 <script setup>
-
+import store from '@/store';
+import { ref } from 'vue';
 const props = defineProps({
     data: {
         type: Array,
         required: true
     }
 });
+const selectedVocab = ref([]);
 
-
+// Khi người dùng chọn checkbox
+// const toggleSelection = (word) => {
+//     const index = selectedVocab.value.indexOf(word);
+//     if (index === -1) {
+//         selectedVocab.value.push(word);
+//     } else {
+//         selectedVocab.value.splice(index, 1);
+//     }
+// };
+const saveSelectedVocab = async () => {
+    if (selectedVocab.value.length === 0) {
+        alert("Vui lòng chọn ít nhất một từ vựng!");
+        return;
+    }
+    try {
+        await store.dispatch('saveSelectedVocab', selectedVocab.value);
+    } catch (error) {
+        console.error("Lỗi khi lưu từ vựng:", error);
+        alert("Đã xảy ra lỗi!");
+    }
+};
 </script>
 
 <template>
@@ -20,10 +42,12 @@ const props = defineProps({
                 <tbody>
                     <tr v-for="(item, index) of props.data" :key="index"
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <input type="checkbox" class="mr-3 cursor-pointer">
+                        <th scope="row"
+                            class="flex items-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <input type="checkbox" :value="item.word " v-model="selectedVocab"
+                                class="mr-3 cursor-pointer">
                             <div>
-                                 <p class="text-lg"> {{ item.word }}</p>
+                                <p class="text-lg"> {{ item.word }}</p>
                                 <p class="text-blue-500">{{ item.pronunciation }}</p>
                             </div>
                         </th>
@@ -36,7 +60,7 @@ const props = defineProps({
         </div>
         <div class="flex my-4 justify-center pt-5">
             <div class='relative  w-40 h-12 font-semibold mt-2 rounded-full bg-lime-600 '></div>
-            <button class='absolute w-40 h-12 font-semibold p-2 rounded-full mb-6 bg-lime-500 '>Tiếp tục</button>
+            <button @click="saveSelectedVocab" class='absolute w-40 h-12 font-semibold p-2 rounded-full mb-6 bg-lime-500 '>Tiếp tục</button>
         </div>
     </div>
 </template>

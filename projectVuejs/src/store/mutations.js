@@ -116,3 +116,9 @@ export const SET_VOCAB_LEVER = (state, vocabLever) => {
 export const SET_CHART_DATA = (state, chartData) => {
    state.chartData = chartData
 };
+export const SET_SELECTED_VOCAB = (state, vocab) => {
+   state.selectedVocab = vocab
+};
+export const removeWorkBook = (state, id) => {
+  state.workBook = state.workBook.filter((vocab) => vocab.id !== id);
+};

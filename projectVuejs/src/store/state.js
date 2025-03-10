@@ -29,5 +29,6 @@ export default{
     voCabLearns: {},
     vocabLever: [],
     chartData: {},
-    
+    selectedVocab: [],
+    workBook : []
 } 

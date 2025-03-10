@@ -340,7 +340,17 @@ export const fetchChartData = async ({ commit }) => {
     return data
 }
 export const fetchSaveVocab = async ({ commit }, id) => {
-    const data = await apiMixin.postWithAuth(`/api/users/selected_vocab`, { id })
-    console.log(data.data)
+    const data = await apiMixin.postWithAuth(`/api/users/selected_vocab?id=${id}`, )
+    if (data) {
+        commit('SET_SELECTED_VOCAB', data)
+        console.log(data.data)
+    }
     return data.data
 }
+export const deleteWorlBook = async ({ commit }, id) => {
+     const data = await apiMixin.deleWithAuth(`api/users/wordbook/${id}`)
+    if (data) {
+        commit('removeWorkBook', data.data)
+    }
+    return data
+};

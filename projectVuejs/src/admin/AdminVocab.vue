@@ -10,14 +10,10 @@ import ModalVocab from '@/Modals/ModalVocab.vue';
 const showModalVocab = ref(false)
 const isEditMode = ref(false)
 const voCabData = ref(null)
-const word = ref('')
-const meaning = ref('')
-const topicName = ref('')
 const totalPage = ref(0)
 const page = ref(0)
 const size = ref(5)
 const listVocab = computed(() => store.getters.getListVocab)
-const allTopic = computed(() => store.getters.getAllTopic)
 
 
 const openModalAddUser = () => {
